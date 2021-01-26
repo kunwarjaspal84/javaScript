@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		var wid=14;
+		var hei=14;
+		var change = 2;
+		var counter = 0;
+		var interval = null;
+		var color1 = ["yellow","grey","green","brown","violet","pink"];
+		function start()
+		{
+			document.getElementById("inner").style.width = wid + "%";
+			document.getElementById("inner").style.height = hei + "%";
+			document.getElementById("output").innerHTML = counter ;
+			increment();
+		}
+		function increment()
+		{
+			if(wid<100)
+			{
+				wid = wid + change;
+				hei = hei + change;
+			}
+			else if(wid==100)
+			{
+				change = change * -1;
+				wid = 99;
+				hei = 99;
+			}
+			if (wid==15)
+			{
+				change = change *-1;
+				wid=14;
+				hei = 14;
+				counter++;
+				document.getElementById("inner").style.background = color1[Math.floor(Math.random()*6)];
+			}
+		}
+		window.onload = hello;
+
+		function hello()
+		{
+			interval = setInterval(start,60);
+		}
+		function pause()
+		{
+			clearInterval(interval);
+		}
+		function resume()
+		{
+			clearInterval(interval);
+			interval = setInterval(start,60);
+		}
+	</script>
+	
+</head>
+<body>
+<div id="outer" style="width:800px;  height: 840px; border: 1px solid black; display: table-cell; vertical-align: middle; text-align: center; ">
+<div id="inner" style = "width: 10% ;height: 10%; border: 1px solid black; position: relative; display: inline-block;text-align: center; vertical-align: middle" >
+<output id="output" style="position: absolute;  margin-top: 50%"></output>
+</div>
+</div>
+<button onclick="pause()">Pause</button>
+<button onclick="resume()">Resume</button>
+</body>
+</html>
